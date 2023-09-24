@@ -1,0 +1,38 @@
+============================README-Tema2=====================================
+
+Am implementat: problema Supercomputer
+Funcția compute primește două cozi (q1 și q2) care reprezintă task-urile care 
+trebuie executate în două seturi de date diferite, o matrice graph ce reprezintă
+dependențele între task-uri, doi vectori inDegree și dataSets, precum și un 
+parametru type care specifică tipul de set de date pe care se lucrează. Funcția
+calculează și returnează numărul minim de schimbări de context necesare pentru
+a executa toate task-urile.
+Se parcurge coada q1 și se prelucrează task-urile din setul de date 1. Se 
+extrage un task din coadă, se actualizează gradul de intrare (inDegree) al 
+vecinilor săi și se adaugă vecinii cu gradul de intrare 0 în coada q1 sau q2 
+în funcție de tipul setului de date. Dacă q1 devine goală, dar q2 nu, se face 
+interschimbarea celor două cozi, se actualizează tipul setului de date (type) 
+și se crește rez cu 1.
+Dacă coada q1 este goală, dar q2 nu, se face interschimbarea celor două cozi, 
+se actualizează tipul setului de date și se crește rez cu 1.
+Funcția main este punctul de intrare în program. Se deschid fișierele de intrare
+(supercomputer.in) și de ieșire (supercomputer.out) utilizând clasele ifstream și
+ofstream. Se declară două cozi (q1 și q2), precum și alte variabile utilizate 
+pentru stocarea datelor de intrare și pentru rezultatul final.
+Se citesc dependențele dintre task-uri și se actualizează matricea dependencies și
+vectorii inDegree și inDegreeaux.
+Se parcurge vectorul dataSets și se adaugă în coada q1 sau q2 task-urile care au gradul 
+de intrare 0.
+Se verifică dacă ambele cozi q1 și q2 sunt nevide. În acest caz, se apelează funcția 
+compute pentru ambele cozi în ordine și se obțin numărul minim de schimbări de context 
+pentru fiecare set de date (r1 și r2). Se alege valoarea minimă dintre cele două și se
+atribuie variabilei rez.
+Dacă coada q1 este goală, se apelează funcția compute pentru coada q2 și se atribuie 
+rezultatul variabilei rez.
+Dacă coada q2 este goală, se apelează funcția compute pentru coada q1 și se atribuie 
+rezultatul variabilei rez.
+Complexitatea : O(N^2 + M), unde N reprezintă numărul de task-uri și
+M reprezintă numărul de dependențe. Aceasta se datorează buclei principale care 
+procesează task-urile și dependențele lor, precum și apelurilor la funcția compute.
+Citirea intrării și scrierea ieșirii au o complexitate constantă, iar construirea
+grafului de dependențe necesită O(M) timp.
